@@ -45,4 +45,13 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return customer.get();
     }
+
+    @Override
+    public Customer findByUser(User user) {
+        Optional<Customer> customer = customerRepository.findByUser(user);
+        if(!customer.isPresent()){
+            throw new RuntimeException("Customer not found.");
+        }
+        return customer.get();
+    }
 }

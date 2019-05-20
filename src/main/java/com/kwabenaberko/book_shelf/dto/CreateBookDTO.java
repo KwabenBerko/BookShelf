@@ -2,7 +2,7 @@ package com.kwabenaberko.book_shelf.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class BookDTO {
+public class CreateBookDTO {
     @NotNull
     private String title;
 

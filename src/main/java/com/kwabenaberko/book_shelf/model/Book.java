@@ -1,5 +1,8 @@
 package com.kwabenaberko.book_shelf.model;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -16,7 +19,10 @@ public class Book {
     @ManyToOne
     private Customer customer;
 
+    @CreatedDate
     private LocalDateTime createdAt;
+
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     private Book(Builder builder) {
@@ -26,9 +32,7 @@ public class Book {
         this.customer = builder.customer;
     }
 
-    protected Book() {
-        this.createdAt = LocalDateTime.now();
-    }
+    protected Book() {}
 
     public Long getId() {
         return id;

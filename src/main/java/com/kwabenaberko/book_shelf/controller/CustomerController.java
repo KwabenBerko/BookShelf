@@ -12,11 +12,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
 @RestController
+@RequestMapping("/customers")
 public class CustomerController {
 
     private CustomerService customerService;
@@ -28,15 +30,15 @@ public class CustomerController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/customers")
+    @PostMapping
     public CustomerDTO createAccount(@RequestBody CreateCustomerDTO dto){
         Customer customer = customerService.add(dto);
         return modelMapper.map(customer, CustomerDTO.class);
     }
 
-    @PostMapping("/customers/me")
-    public User getProfile(@CurrentUser User user){
-        //Customer customer = customerService.findById()
-        return user;
+    @PostMapping("/me")
+    public CustomerDTO getProfile(@CurrentUser User user){
+        Customer customer = customerService.findByUser(user);
+        return modelMapper.map(customer, CustomerDTO.class);
     }
 }
