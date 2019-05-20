@@ -1,5 +1,7 @@
 package com.kwabenaberko.book_shelf.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,15 +16,15 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-    private boolean completed;
+    private boolean completed = false;
 
     @ManyToOne
     private Customer customer;
 
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     private Book(Builder builder) {
